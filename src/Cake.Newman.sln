@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cake.Newman", "Cake.Newman\Cake.Newman.xproj", "{E2FB1D96-7CBE-4B15-8859-9EB4E83A993C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cake.Newman.Tests", "Cake.Newman.Tests\Cake.Newman.Tests.xproj", "{9B3DE0EF-3B3F-432C-8C0C-A654CF7CEFCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{032E51BA-9B85-4204-B9CD-BFC001AC1D3A}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.cake = ..\build.cake
+		..\build.ps1 = ..\build.ps1
+		..\helpers.cake = ..\helpers.cake
+		..\README.md = ..\README.md
+		..\ReleaseNotes.md = ..\ReleaseNotes.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2FB1D96-7CBE-4B15-8859-9EB4E83A993C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2FB1D96-7CBE-4B15-8859-9EB4E83A993C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2FB1D96-7CBE-4B15-8859-9EB4E83A993C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2FB1D96-7CBE-4B15-8859-9EB4E83A993C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B3DE0EF-3B3F-432C-8C0C-A654CF7CEFCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B3DE0EF-3B3F-432C-8C0C-A654CF7CEFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B3DE0EF-3B3F-432C-8C0C-A654CF7CEFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B3DE0EF-3B3F-432C-8C0C-A654CF7CEFCD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
