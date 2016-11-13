@@ -1,6 +1,8 @@
 #tool "GitVersion.CommandLine"
 #addin "Cake.DocFx"
 #tool "docfx.msbuild"
+#tool "OpenCover"
+
 
 #load "helpers.cake"
 
@@ -23,7 +25,7 @@ var projectPaths = projects.Select(p => p.Path.GetDirectory());
 var frameworks = GetFrameworks(framework);
 var testAssemblies = projects.Where(p => p.Name.Contains(".Tests"));
 var artifacts = "./dist/";
-var testResultsPath = MakeAbsolute(Directory(artifacts + "./test-results"));
+var testResultsPath = MakeAbsolute(Directory(artifacts + "./test-results/"));
 GitVersion versionInfo = null;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -112,11 +114,20 @@ Task("Run-Unit-Tests")
 	.Does(() =>
 {
 	CreateDirectory(testResultsPath);
-	DotNetCoreTest("./src/Cake.Newman.Tests", new DotNetCoreTestSettings {
+	Action<ICakeContext> testAction = ctx => ctx.DotNetCoreTest("./src/Cake.Newman.Tests", new DotNetCoreTestSettings {
 		NoBuild = true,
 		Configuration = configuration,
 		ArgumentCustomization = args => args.AppendSwitchQuoted("-xml", testResultsPath + "test-results.xml")
 	});
+	OpenCover(testAction,
+		testResultsPath + "coverage.xml",
+		new OpenCoverSettings {
+			ReturnTargetCodeOffset = 0,
+			ArgumentCustomization = args => args.Append("-mergeoutput")
+		}
+		.WithFilter("+[*.Tests]*")
+		.ExcludeByAttribute("*.ExcludeFromCodeCoverage*")
+		.ExcludeByFile("*/*Designer.cs;*/*.g.cs;*/*.g.i.cs"));
 });
 
 Task("NuGet")
@@ -134,7 +145,7 @@ Task("NuGet")
 			ReleaseNotes = versionNotes != null ? versionNotes.Notes.ToList() : new List<string>(),
 			OutputDirectory = artifacts + "/package",
 			Files = content,
-			KeepTemporaryNuSpecFile = true
+			//KeepTemporaryNuSpecFile = true
 			});
 	});
 
@@ -143,7 +154,8 @@ Task("NuGet")
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Default")
-	.IsDependentOn("NuGet");
+	.IsDependentOn("NuGet")
+	.IsDependentOn("Generate-Docs");
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTION
