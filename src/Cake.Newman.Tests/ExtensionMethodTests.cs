@@ -37,6 +37,19 @@ namespace Cake.Newman.Tests
         public void ShouldSpecifyInsecureWhenInvoked()
         {
             // Given
+            var fixture = new NewmanFixture(s => s.Insecure());
+
+            // When
+            var result = fixture.Run();
+
+            // Then
+            result.Args().Should().Be("--insecure");
+        }
+
+        [Fact]
+        public void ShouldSpecifyInsecureWhenAliasInvoked()
+        {
+            // Given
             var fixture = new NewmanFixture(s => s.DisableStrictSSL());
 
             // When

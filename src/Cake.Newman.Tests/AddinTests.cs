@@ -8,7 +8,8 @@ using System.IO;
 
 namespace Cake.Newman.Tests
 {
-    public sealed class AddinTests {
+    public sealed class AddinTests
+    {
         [Theory]
         [InlineData("./tools/newman.exe", "/Working/tools/newman.exe")]
         public void ShouldUseExecutableFromToolPathIfProvided(string toolPath, string expected)
@@ -88,7 +89,8 @@ namespace Cake.Newman.Tests
         }
 
         [Fact]
-        public void ShouldThrowIfFileDoesNotExist() {
+        public void ShouldThrowIfFileDoesNotExist()
+        {
             // Given
             var fixture = new NewmanFixture();
             fixture.InputFile = "./nonexistent.json";
@@ -101,7 +103,8 @@ namespace Cake.Newman.Tests
         }
 
         [Fact]
-        public void ShouldUseSpecifiedCollectionFile() {
+        public void ShouldUseSpecifiedCollectionFile()
+        {
             // Given
             var fixture = new NewmanFixture();
             fixture.InputFile = "./custom-collection.json";

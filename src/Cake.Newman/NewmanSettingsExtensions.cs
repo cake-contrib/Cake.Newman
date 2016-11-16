@@ -10,6 +10,7 @@ namespace Cake.Newman
         /// <summary>
         ///     Disables SSL verification checks and allows self-signed SSL certificates.
         /// </summary>
+        /// <remarks>This is an alias for <see cref="Insecure"/>.</remarks>
         /// <param name="settings">The settings.</param>
         /// <returns>The updated settings.</returns>
         public static NewmanSettings DisableStrictSSL(this NewmanSettings settings)

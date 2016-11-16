@@ -2,6 +2,8 @@
 #addin "Cake.DocFx"
 #tool "docfx.msbuild"
 #tool "OpenCover"
+#tool "nuget:?package=ReportGenerator"
+
 
 
 #load "helpers.cake"
@@ -114,20 +116,22 @@ Task("Run-Unit-Tests")
 	.Does(() =>
 {
 	CreateDirectory(testResultsPath);
+	CreateDirectory(testResultsPath + "/coverage");
 	Action<ICakeContext> testAction = ctx => ctx.DotNetCoreTest("./src/Cake.Newman.Tests", new DotNetCoreTestSettings {
 		NoBuild = true,
 		Configuration = configuration,
-		ArgumentCustomization = args => args.AppendSwitchQuoted("-xml", testResultsPath + "test-results.xml")
+		ArgumentCustomization = args => args.AppendSwitchQuoted("-xml", testResultsPath + "/test-results.xml")
 	});
 	OpenCover(testAction,
-		testResultsPath + "coverage.xml",
+		testResultsPath + "/coverage.xml",
 		new OpenCoverSettings {
 			ReturnTargetCodeOffset = 0,
 			ArgumentCustomization = args => args.Append("-mergeoutput")
 		}
-		.WithFilter("+[*.Tests]*")
+		.WithFilter("+[Cake.Newman]*")
 		.ExcludeByAttribute("*.ExcludeFromCodeCoverage*")
 		.ExcludeByFile("*/*Designer.cs;*/*.g.cs;*/*.g.i.cs"));
+	ReportGenerator(testResultsPath + "/coverage.xml", testResultsPath + "/coverage");
 });
 
 Task("NuGet")
