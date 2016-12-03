@@ -8,8 +8,8 @@ You may find Newman's documentation helpful as well, which can also be found [on
 
 ## Build and Release status
 
-| |`master`|`develop`|
-|-|--------|---------|
+|Status|`master`|`develop`|
+|------|--------|---------|
 |Build|![master Build](https://vs01.visualstudio.com/_apis/public/build/definitions/09d675bd-0b92-45dc-8a6c-f8c4976b4ef0/29/badge)|![develop Build](https://vs01.visualstudio.com/_apis/public/build/definitions/09d675bd-0b92-45dc-8a6c-f8c4976b4ef0/28/badge)|
 |Release|[![NuGet](https://img.shields.io/nuget/v/Cake.Newman.svg?style=flat-square)](https://www.nuget.org/packages/Cake.Newman/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Cake.Newman.svg?style=flat-square)](https://www.nuget.org/packages/Cake.Newman/)|
 
