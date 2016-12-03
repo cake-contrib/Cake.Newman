@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Settings </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Settings ">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1 id="settings">Settings</h1>
+              
+<p>Since <code>newman</code> supports such a massive number of command line options, this addin includes a complex settings structure.</p>
+<p>While it is possible to create the settings object &#39;manually&#39;, it is not recommended. In particular, working with reporters will be very difficult when creating the settings object directly. Instead, the addin provides a full set of extension methods as a fluent API. For example, the folllowing object code:</p>
+<pre><code class="lang-csharp">var settings = new NewmanSettings()
+{
+    DisableStrictSSL = true,
+    ExportCollectionPath = &quot;./collection-export.json&quot;,
+};
+settings.Reporters.Add(&quot;json&quot;, new JsonReporterSettings()
+{
+    OutputFile = &quot;./json-report.json&quot;
+});
+RunCollection(&quot;./collection.json&quot;, settings);
+</code></pre><p>can be replicated using the following fluent API code:</p>
+<pre><code class="lang-csharp">RunCollection(&quot;./collection.json&quot;, s =&gt; 
+    s.DisableStrictSSL()
+    .ExportCollectionTo(&quot;./collection-export.json&quot;)
+    .UseJsonReporter(&quot;./json-report.json&quot;));
+</code></pre><p>The complete extension methods are available in the Reference documentation (from the nav bar above), but a quick summary of all of the available settings is also included below.</p>
+<pre><code class="lang-csharp">RunCollection(&quot;./collection.json&quot;, s =&gt; 
+    s.DisableStrictSSL()
+    .ExitOnFirstFailure()
+    .IgnoreRedirects()
+    .RunOnlyFolder(&quot;Tests&quot;)
+    .SetRequestDelay(1000)
+    .SetRequestTimeout(5000)
+    .ExportCollectionTo(&quot;./export-collection.json&quot;)
+    .ExportGlobalsTo(&quot;./export-globals.json&quot;)
+    .ExportEnvironmentTo(&quot;./export-environments.json&quot;)
+    .UseCLIReporter(c =&gt; 
+        c.RunSilently()
+        .DisableAssertions()
+        .DisableConsoleOutput()
+        .DisableSeparateFailures()
+        .DisableSummary())
+    .UseHtmlReporter(h =&gt;
+        h.UseOutputFile(&quot;./output-report.html&quot;)
+        .UseTemplateFile(&quot;./template.html&quot;))
+    .UseJsonReporter(&quot;./output-report.json&quot;)
+    .UseJUnitReporter(&quot;./output-report.xml&quot;));
+</code></pre>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/agc93/Cake.Newman/blob/develop/docfx/doc/settings.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2015-2016 Microsoft<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
