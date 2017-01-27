@@ -15,18 +15,19 @@ namespace Cake.Newman
         {
             Log = log;
             FileSystem = fileSystem;
+            Environment = environment;
         }
 
         private ICakeLog Log { get; }
         private IFileSystem FileSystem { get; }
+        private ICakeEnvironment Environment { get; }
 
         protected override string GetToolName() => "Newman";
 
         protected override IEnumerable<string> GetToolExecutableNames()
         {
+            yield return Environment.Platform.Family == PlatformFamily.Windows ? "newman.cmd" : "newman.sh";
             yield return "newman";
-            yield return "newman.cmd";
-            yield return "newman.sh";
         }
 
         internal void RunTool(FilePath collectionFile, NewmanSettings settings)
