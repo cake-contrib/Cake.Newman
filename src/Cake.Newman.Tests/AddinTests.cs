@@ -48,7 +48,7 @@ namespace Cake.Newman.Tests
             // When
             var result = fixture.Run();
             // Then
-            result.Path.FullPath.Should().Be("/Working/tools/newman.cmd");
+            result.Path.FullPath.Should().Be("/Working/tools/newman");
         }
 
         [Fact]
