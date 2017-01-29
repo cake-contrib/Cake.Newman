@@ -4,8 +4,6 @@
 #tool "OpenCover"
 #tool "nuget:?package=ReportGenerator"
 
-
-
 #load "helpers.cake"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -14,7 +12,7 @@
 
 var target = Argument<string>("target", "Default");
 var configuration = Argument<string>("configuration", "Release");
-var framework = Argument<string>("framework", "net451,netstandard1.6");
+var framework = Argument<string>("framework", "net45,netstandard1.6");
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES

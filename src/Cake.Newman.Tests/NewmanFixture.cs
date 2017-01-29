@@ -9,7 +9,7 @@ namespace Cake.Newman.Tests
     {
         internal FilePath InputFile {get;set;}
 
-        public NewmanFixture () : base("newman.cmd")
+        public NewmanFixture () : base("newman")
         {
             Settings = Settings ?? new NewmanSettings();
             InputFile = "./collection.json";
