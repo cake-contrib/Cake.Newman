@@ -1,12 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cake.Newman", "Cake.Newman\Cake.Newman.xproj", "{E2FB1D96-7CBE-4B15-8859-9EB4E83A993C}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cake.Newman.Tests", "Cake.Newman.Tests\Cake.Newman.Tests.xproj", "{9B3DE0EF-3B3F-432C-8C0C-A654CF7CEFCD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{032E51BA-9B85-4204-B9CD-BFC001AC1D3A}"
 	ProjectSection(SolutionItems) = preProject
 		..\build.cake = ..\build.cake
@@ -15,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 		..\ReleaseNotes.md = ..\ReleaseNotes.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Newman", "Cake.Newman\Cake.Newman.csproj", "{E2FB1D96-7CBE-4B15-8859-9EB4E83A993C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Newman.Tests", "Cake.Newman.Tests\Cake.Newman.Tests.csproj", "{9B3DE0EF-3B3F-432C-8C0C-A654CF7CEFCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,5 +33,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E56C58C3-FD4A-4CA9-AAA6-8CEF45D828C8}
 	EndGlobalSection
 EndGlobal
