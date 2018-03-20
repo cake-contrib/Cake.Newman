@@ -14,5 +14,7 @@ namespace Cake.Newman
         internal const string RequestDelay = "--delay-request";
         internal const string Bail = "--bail";
         internal const string Reporters = "--reporters";
+        internal const string IterationCount = "--iteration-count";
+        internal const string Data = "-d";
     }
 }

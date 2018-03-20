@@ -19,6 +19,12 @@ namespace Cake.Newman
         public FilePath EnvironmentFile { get; set; }
 
         /// <summary>
+        ///     An environment file path.
+        /// </summary>
+        /// <remarks>Data provide a set of variables for each iteration that one can use within collections.</remarks>
+        public FilePath DataFile { get; set; }
+
+        /// <summary>
         ///     File path for global variables.
         /// </summary>
         /// <remarks>
@@ -73,6 +79,11 @@ namespace Cake.Newman
         public bool ExitOnFirstFailure { get; set; }
 
         /// <summary>
+        ///     Specify iteration count.
+        /// </summary>
+        public int IterationCount { get; set; }
+
+        /// <summary>
         ///     Reporters (and any reporter-specific options) for test results
         /// </summary>
         public Dictionary<string, IReporterSettings> Reporters { get; set; } =
@@ -85,6 +96,8 @@ namespace Cake.Newman
         public void Build(ProcessArgumentBuilder args)
         {
             if (EnvironmentFile != null) args.AppendSwitchQuoted(ArgumentNames.Environment, EnvironmentFile.FullPath);
+            if (DataFile != null) args.AppendSwitchQuoted(ArgumentNames.Data, DataFile.FullPath);
+
             if (GlobalVariablesFile != null)
                 args.AppendSwitchQuoted(ArgumentNames.Globals, GlobalVariablesFile.FullPath);
             if (!string.IsNullOrWhiteSpace(Folder)) args.AppendSwitchQuoted(ArgumentNames.Folder, Folder);
@@ -105,6 +118,7 @@ namespace Cake.Newman
             if (DisableStrictSSL) args.Append(ArgumentNames.Insecure);
             if (IgnoreRedirects) args.Append(ArgumentNames.IgnoreRedirects);
             if (RequestDelay != default(int)) args.AppendSwitch(ArgumentNames.RequestDelay, RequestDelay.ToString());
+            if (IterationCount != default(int)) args.AppendSwitch(ArgumentNames.IterationCount, IterationCount.ToString());
             if (ExitOnFirstFailure) args.Append(ArgumentNames.Bail);
             if (Reporters.Any())
             {
