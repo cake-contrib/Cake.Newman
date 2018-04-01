@@ -65,6 +65,18 @@ namespace Cake.Newman
         }
 
         /// <summary>
+        /// Sets the time to wait for script to complete.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="timeout">The time (in milliseconds)</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings SetScriptTimeout(this NewmanSettings settings, int timeout)
+        {
+            settings.ScriptTimeout = timeout;
+            return settings;
+        }
+
+        /// <summary>
         /// Specify the extent of delay between requests (in milliseconds).
         /// </summary>
         /// <param name="settings">The settings.</param>

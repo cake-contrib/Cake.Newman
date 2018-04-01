@@ -59,6 +59,11 @@ namespace Cake.Newman
         public int RequestTimeout { get; set; }
 
         /// <summary>
+        ///     The time (in milliseconds) to wait for script to execute.
+        /// </summary>
+        public int ScriptTimeout { get; set; }
+
+        /// <summary>
         ///     Disables SSL verification checks and allows self-signed SSL certificates.
         /// </summary>
         public bool DisableStrictSSL { get; set; }
@@ -114,6 +119,10 @@ namespace Cake.Newman
             if (RequestTimeout != default(int))
             {
                 args.AppendSwitch(ArgumentNames.RequestTimeout, RequestTimeout.ToString());
+            }
+            if (ScriptTimeout != default(int))
+            {
+                args.AppendSwitch(ArgumentNames.ScriptTimeout, ScriptTimeout.ToString());
             }
             if (DisableStrictSSL) args.Append(ArgumentNames.Insecure);
             if (IgnoreRedirects) args.Append(ArgumentNames.IgnoreRedirects);

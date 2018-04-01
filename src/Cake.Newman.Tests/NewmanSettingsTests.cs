@@ -76,6 +76,21 @@ namespace Cake.Newman.Tests
             result.Args().Should().Be($"--timeout-request {timeout}");
         }
 
+        [Theory]
+        [InlineData(2000)]
+        [InlineData(3000)]
+        public void ShouldSpecifyScriptTimeoutWhenSet(int timeout)
+        {
+            // Given
+            var fixture = new NewmanFixture { Settings = { ScriptTimeout = timeout } };
+
+            // When
+            var result = fixture.Run();
+
+            // Then
+            result.Args().Should().Be($"--timeout-script {timeout}");
+        }
+
         [Fact]
         public void ShouldSpecifyFolderWhenSet()
         {
