@@ -146,5 +146,29 @@ namespace Cake.Newman
             settings.EnvironmentFile = environmentFile;
             return settings;
         }
+
+        /// <summary>
+        /// Specify the file path for an data file to use for the current execution.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="dataFile">The path to the input data file.</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings WithData(this NewmanSettings settings, FilePath dataFile)
+        {
+            settings.DataFile = dataFile;
+            return settings;
+        }
+
+        /// <summary>
+        /// Sets the iteration count.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="iterationCount">Iteration count</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings SetIterationCount(this NewmanSettings settings, int iterationCount)
+        {
+            settings.IterationCount = iterationCount;
+            return settings;
+        }
     }
 }
