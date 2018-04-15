@@ -118,13 +118,16 @@ Task("Run-Unit-Tests")
 	Action<ICakeContext> testAction = ctx => ctx.DotNetCoreTest("./src/Cake.Newman.Tests", new DotNetCoreTestSettings {
 		NoBuild = true,
 		Configuration = configuration,
-		ArgumentCustomization = args => args.AppendSwitchQuoted("--logger", "trx;LogFileName="+testResultsPath + "/test-results.xml")
+		ArgumentCustomization = args => args.Append("--").AppendSwitchQuoted("-xml", testResultsPath + "/test-results.xml")
 	});
 	OpenCover(testAction,
 		testResultsPath + "/coverage.xml",
 		new OpenCoverSettings {
 			ReturnTargetCodeOffset = 0,
-			ArgumentCustomization = args => args.Append("-mergeoutput")
+			Register = "User",
+			OldStyle = true,
+			ArgumentCustomization = args => args.Append("-mergeoutput"),
+			// SearchDirectories = frameworks.Select(f => $"./src/Cake.Newman.Tests/bin/{configuration}/{f}")
 		}
 		.WithFilter("+[Cake.Newman]*")
 		.ExcludeByAttribute("*.ExcludeFromCodeCoverage*")
