@@ -60,7 +60,7 @@ namespace Cake.Newman.Tests
             // When
             var action = new Action(() => fixture.Run());
             // Then
-            action.ShouldThrow<CakeException>().WithMessage("Newman: Could not locate executable.");
+            action.Should().Throw<CakeException>().WithMessage("Newman: Could not locate executable.");
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace Cake.Newman.Tests
             var action = new Action(() => fixture.Run());
 
             // Then
-            action.ShouldThrow<CakeException>()
+            action.Should().Throw<CakeException>()
                 .WithMessage("Newman: Process returned an error (exit code 1).");
         }
 
@@ -85,7 +85,7 @@ namespace Cake.Newman.Tests
             var fixture = new NewmanFixture();
             fixture.GivenProcessCannotStart();
             var action = new Action(() => fixture.Run());
-            action.ShouldThrow<CakeException>().WithMessage("Newman: Process was not started.");
+            action.Should().Throw<CakeException>().WithMessage("Newman: Process was not started.");
         }
 
         [Fact]
@@ -99,7 +99,7 @@ namespace Cake.Newman.Tests
             Action action = () => fixture.Run();
 
             // Then
-            action.ShouldThrow<FileNotFoundException>().WithMessage("nonexistent.json", "input file doesn't exist");
+            action.Should().Throw<FileNotFoundException>().WithMessage("nonexistent.json", "input file doesn't exist");
         }
 
         [Fact]

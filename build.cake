@@ -1,6 +1,6 @@
 #tool "GitVersion.CommandLine"
 #addin "Cake.DocFx"
-#tool "docfx.msbuild"
+#tool "docfx.console"
 #tool "OpenCover"
 #tool "nuget:?package=ReportGenerator"
 
@@ -12,7 +12,7 @@
 
 var target = Argument<string>("target", "Default");
 var configuration = Argument<string>("configuration", "Release");
-var framework = Argument<string>("framework", "net45,netstandard1.6");
+var framework = Argument<string>("framework", "net462,netstandard2.0");
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES
@@ -73,7 +73,7 @@ Task("Restore")
 	Information("Restoring solution...");
 	//NuGetRestore(solutionPath);
 	foreach(var project in projects) {
-		DotNetCoreRestore(project.Path.GetDirectory() + "/project.json");
+		DotNetCoreRestore(project.Path.GetDirectory() + $"/{project.Name}.csproj");
 	}
 });
 
@@ -105,7 +105,7 @@ Task("Post-Build")
 	});
 
 Task("Generate-Docs").Does(() => {
-	DocFx("./docfx/docfx.json");
+	DocFxBuild("./docfx/docfx.json");
 	Zip("./docfx/_site/", artifacts + "/docfx.zip");
 });
 
@@ -118,13 +118,16 @@ Task("Run-Unit-Tests")
 	Action<ICakeContext> testAction = ctx => ctx.DotNetCoreTest("./src/Cake.Newman.Tests", new DotNetCoreTestSettings {
 		NoBuild = true,
 		Configuration = configuration,
-		ArgumentCustomization = args => args.AppendSwitchQuoted("-xml", testResultsPath + "/test-results.xml")
+		ArgumentCustomization = args => args.Append("--").AppendSwitchQuoted("-xml", testResultsPath + "/test-results.xml")
 	});
 	OpenCover(testAction,
 		testResultsPath + "/coverage.xml",
 		new OpenCoverSettings {
 			ReturnTargetCodeOffset = 0,
-			ArgumentCustomization = args => args.Append("-mergeoutput")
+			Register = "User",
+			OldStyle = true,
+			ArgumentCustomization = args => args.Append("-mergeoutput"),
+			// SearchDirectories = frameworks.Select(f => $"./src/Cake.Newman.Tests/bin/{configuration}/{f}")
 		}
 		.WithFilter("+[Cake.Newman]*")
 		.ExcludeByAttribute("*.ExcludeFromCodeCoverage*")
