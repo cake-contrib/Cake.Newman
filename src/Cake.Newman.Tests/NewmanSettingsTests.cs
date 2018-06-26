@@ -11,8 +11,7 @@ namespace Cake.Newman.Tests
             public void ShouldIncludeInsecureWhenSet()
             {
                 // Given
-                var fixture = new NewmanFixture();
-                fixture.Settings.DisableStrictSSL = true;
+                var fixture = new NewmanFixture { Settings = { DisableStrictSSL = true } };
 
                 // When
                 var result = fixture.Run();
@@ -22,9 +21,9 @@ namespace Cake.Newman.Tests
             }
 
             [Fact]
-            public void ShouldIncludeIgnoreRedirectsWhenSet() {
-                var fixture = new NewmanFixture();
-                fixture.Settings.IgnoreRedirects = true;
+            public void ShouldIncludeIgnoreRedirectsWhenSet()
+            {
+                var fixture = new NewmanFixture { Settings = { IgnoreRedirects = true } };
 
                 // When
                 var result = fixture.Run();
@@ -34,9 +33,9 @@ namespace Cake.Newman.Tests
             }
 
             [Fact]
-            public void ShouldIncludeBailWhenSet() {
-                var fixture = new NewmanFixture();
-                fixture.Settings.ExitOnFirstFailure = true;
+            public void ShouldIncludeBailWhenSet()
+            {
+                var fixture = new NewmanFixture { Settings = { ExitOnFirstFailure = true } };
 
                 // When
                 var result = fixture.Run();
@@ -50,10 +49,10 @@ namespace Cake.Newman.Tests
         [Theory]
         [InlineData(1000)]
         [InlineData(5000)]
-        public void ShouldSetRequestDelayWhenSet(int delay) {
+        public void ShouldSetRequestDelayWhenSet(int delay)
+        {
             // Given
-            var fixture = new NewmanFixture();
-            fixture.Settings.RequestDelay = delay;
+            var fixture = new NewmanFixture { Settings = { RequestDelay = delay } };
 
             // When
             var result = fixture.Run();
@@ -65,10 +64,10 @@ namespace Cake.Newman.Tests
         [Theory]
         [InlineData(2000)]
         [InlineData(3000)]
-        public void ShouldSpecifyRequestTimeoutWhenSet(int timeout) {
+        public void ShouldSpecifyRequestTimeoutWhenSet(int timeout)
+        {
             // Given
-            var fixture = new NewmanFixture();
-            fixture.Settings.RequestTimeout = timeout;
+            var fixture = new NewmanFixture { Settings = { RequestTimeout = timeout } };
 
             // When
             var result = fixture.Run();
@@ -77,11 +76,26 @@ namespace Cake.Newman.Tests
             result.Args().Should().Be($"--timeout-request {timeout}");
         }
 
-        [Fact]
-        public void ShouldSpecifyFolderWhenSet() {
+        [Theory]
+        [InlineData(2000)]
+        [InlineData(3000)]
+        public void ShouldSpecifyScriptTimeoutWhenSet(int timeout)
+        {
             // Given
-            var fixture = new NewmanFixture();
-            fixture.Settings.Folder = "Api Service";
+            var fixture = new NewmanFixture { Settings = { ScriptTimeout = timeout } };
+
+            // When
+            var result = fixture.Run();
+
+            // Then
+            result.Args().Should().Be($"--timeout-script {timeout}");
+        }
+
+        [Fact]
+        public void ShouldSpecifyFolderWhenSet()
+        {
+            // Given
+            var fixture = new NewmanFixture { Settings = { Folder = "Api Service" } };
 
             // When
             var result = fixture.Run();
@@ -90,26 +104,42 @@ namespace Cake.Newman.Tests
             result.Args().Should().Be("--folder \"Api Service\"", "Cake should have quoted this argument");
         }
 
-        public sealed class TheExportPaths {
+        [Theory]
+        [InlineData(2000)]
+        [InlineData(3000)]
+        public void ShouldSpecifyIterationCountWhenSet(int iterationCount)
+        {
+            // Given
+            var fixture = new NewmanFixture { Settings = { IterationCount = iterationCount } };
+
+            // When
+            var result = fixture.Run();
+
+            // Then
+            result.Args().Should().Be($"--iteration-count {iterationCount}");
+        }
+
+        public sealed class TheExportPaths
+        {
             [Fact]
-            public void ShouldSpecifyCollectionExportPath() {
+            public void ShouldSpecifyCollectionExportPath()
+            {
                 // Given
                 var path = "./export/collection.json";
-                var fixture = new NewmanFixture();
-                fixture.Settings.ExportCollectionPath = path;
+                var fixture = new NewmanFixture { Settings = { ExportCollectionPath = path } };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                result.Args().Should().Be("--export-collection \"export/collection.json\"", "file paths are quoted and trimmed"); 
+                result.Args().Should().Be("--export-collection \"export/collection.json\"", "file paths are quoted and trimmed");
             }
 
             [Fact]
-            public void ShouldSpecifyEnvironmentExportPath() {
+            public void ShouldSpecifyEnvironmentExportPath()
+            {
                 // Given
-                var fixture = new NewmanFixture();
-                fixture.Settings.ExportEnvironmentPath = "./export/environment.json";
+                var fixture = new NewmanFixture { Settings = { ExportEnvironmentPath = "./export/environment.json" } };
 
                 // When
                 var result = fixture.Run();
@@ -119,10 +149,10 @@ namespace Cake.Newman.Tests
             }
 
             [Fact]
-            public void ShouldSpecifyGlobalsPath() {
+            public void ShouldSpecifyGlobalsPath()
+            {
                 // Given
-                var fixture = new NewmanFixture();
-                fixture.Settings.ExportGlobalsPath = "./export/globals.json";
+                var fixture = new NewmanFixture { Settings = { ExportGlobalsPath = "./export/globals.json" } };
 
                 // When
                 var result = fixture.Run();
@@ -132,12 +162,13 @@ namespace Cake.Newman.Tests
             }
         }
 
-        public sealed class TheFilePaths {
+        public sealed class TheFilePaths
+        {
             [Fact]
-            public void ShouldSpecifyEnvironmentsFile() {
+            public void ShouldSpecifyEnvironmentsFile()
+            {
                 // Given
-                var fixture = new NewmanFixture();
-                fixture.Settings.EnvironmentFile = "./collection.json";
+                var fixture = new NewmanFixture { Settings = { EnvironmentFile = "./collection.json" } };
 
                 // When
                 var result = fixture.Run();
@@ -147,16 +178,29 @@ namespace Cake.Newman.Tests
             }
 
             [Fact]
-            public void ShouldSpecifyGlobalsFile() {
+            public void ShouldSpecifyGlobalsFile()
+            {
                 // Given
-                var fixture = new NewmanFixture();
-                fixture.Settings.GlobalVariablesFile = "./vars/globals.json";
+                var fixture = new NewmanFixture { Settings = { GlobalVariablesFile = "./vars/globals.json" } };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
                 result.Args().Should().Be("--globals \"vars/globals.json\"", "file paths are quoted and trimmed");
+            }
+
+            [Fact]
+            public void ShouldSpecifyDataFile()
+            {
+                // Given
+                var fixture = new NewmanFixture { Settings = { DataFile = "./vars/data.json" } };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                result.Args().Should().Be("-d \"vars/data.json\"", "file paths are quoted and trimmed");
             }
         }
     }

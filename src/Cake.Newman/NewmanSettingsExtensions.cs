@@ -65,6 +65,18 @@ namespace Cake.Newman
         }
 
         /// <summary>
+        /// Sets the time to wait for script to complete.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="timeout">The time (in milliseconds)</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings SetScriptTimeout(this NewmanSettings settings, int timeout)
+        {
+            settings.ScriptTimeout = timeout;
+            return settings;
+        }
+
+        /// <summary>
         /// Specify the extent of delay between requests (in milliseconds).
         /// </summary>
         /// <param name="settings">The settings.</param>
@@ -144,6 +156,30 @@ namespace Cake.Newman
         public static NewmanSettings WithEnvironment(this NewmanSettings settings, FilePath environmentFile)
         {
             settings.EnvironmentFile = environmentFile;
+            return settings;
+        }
+
+        /// <summary>
+        /// Specify the file path for an data file to use for the current execution.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="dataFile">The path to the input data file.</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings WithData(this NewmanSettings settings, FilePath dataFile)
+        {
+            settings.DataFile = dataFile;
+            return settings;
+        }
+
+        /// <summary>
+        /// Sets the iteration count.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="iterationCount">Iteration count</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings SetIterationCount(this NewmanSettings settings, int iterationCount)
+        {
+            settings.IterationCount = iterationCount;
             return settings;
         }
     }
