@@ -1,6 +1,6 @@
 #tool "GitVersion.CommandLine"
-#addin "Cake.DocFx"
-#tool "docfx.console"
+#addin nuget:?package=Cake.DocFx
+#tool nuget:?package=docfx.console&version=2.33.2
 #tool "OpenCover"
 #tool "nuget:?package=ReportGenerator"
 
@@ -12,7 +12,7 @@
 
 var target = Argument<string>("target", "Default");
 var configuration = Argument<string>("configuration", "Release");
-var framework = Argument<string>("framework", "net462,netstandard2.0");
+var framework = Argument<string>("framework", "netstandard2.0");
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES
