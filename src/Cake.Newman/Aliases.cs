@@ -17,7 +17,7 @@ namespace Cake.Newman
     /// </code>
     /// </para>
     /// <para>
-    /// Postman needs the Newman npm package to run, or else the error 'Newman: executable not found' will be raised. You need to import
+    /// Postman needs the Newman npm package to run, or else the error 'Newman: Could not locate executable' will be raised. You need to import
     /// the Postman package first. To do this, create a task and import the 'Postman' npm package using <see href="https://cakebuild.net/dsl/npm/">NpmInstall</see>.
     /// </para>
     /// <para>More information can be found in the <see href="https://cake-contrib.github.io/Cake.Newman/doc/intro.html">cake-contrib docs</see></para>
