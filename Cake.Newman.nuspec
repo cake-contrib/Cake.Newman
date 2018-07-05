@@ -7,7 +7,7 @@
 		<owners>Alistair Chapman, cake-contrib</owners>
 		<licenseUrl>https://raw.githubusercontent.com/cake-contrib/Cake.Newman/master/LICENSE</licenseUrl>
 		<projectUrl>https://github.com/cake-contrib/Cake.Newman/</projectUrl>
-		<iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+		<iconUrl>https://github.com/cake-contrib/graphics/blob/master/png/cake-contrib-medium.png</iconUrl>
 		<language>en-AU</language>
 		<description>A Cake addin to test APIs using Postman Collections</description>
 		<tags>cake build script postman api newman rest test</tags>
