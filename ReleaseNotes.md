@@ -9,3 +9,7 @@
 - Updated to support script timeout, iteration count and data files (thanks @vkbishnoi!)
 - Update to Cake 0.28.1
 - Miscellaneous fixes and doc improvements
+
+# 0.3.1
+
+- Update package icon URL
