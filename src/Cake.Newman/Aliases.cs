@@ -13,8 +13,13 @@ namespace Cake.Newman
     /// reference from NuGet.org:
     /// <code>
     /// #addin Cake.Newman
+    /// #addin Cake.Npm
     /// </code>
     /// </para>
+    /// <para>
+    /// In order to be able to run Postman tests, newman needs to be installed and available.
+    /// </para>
+    /// <para>More information can be found in the <see href="https://cake-contrib.github.io/Cake.Newman/doc/intro.html">cake-contrib docs</see></para>
     /// </summary>
     [CakeAliasCategory("Postman")]
     [CakeNamespaceImport("Cake.Newman")]
