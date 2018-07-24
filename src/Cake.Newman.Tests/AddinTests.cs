@@ -114,7 +114,7 @@ namespace Cake.Newman.Tests
             var result = fixture.Run();
 
             // Then
-            result.Args.Should().Be("run custom-collection.json", "provided file is specified");
+            result.Args.Should().Be("run \"custom-collection.json\"", "provided file is specified");
         }
     }
 }

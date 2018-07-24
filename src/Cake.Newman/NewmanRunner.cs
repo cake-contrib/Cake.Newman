@@ -37,7 +37,7 @@ namespace Cake.Newman
             if (!FileSystem.Exist(collectionFile)) throw new FileNotFoundException(collectionFile.FullPath);
             var args = new ProcessArgumentBuilder();
             args.Append("run");
-            args.Append(collectionFile.FullPath);
+            args.AppendQuoted(collectionFile.FullPath);
             settings.Build(args);
             Log.Debug(args.Render());
             Run(settings, args);

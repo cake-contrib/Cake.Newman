@@ -7,7 +7,7 @@ namespace Cake.Newman.Tests
     {
         internal static string Args(this ToolFixtureResult result)
         {
-            return result.Args.Replace("run collection.json ", string.Empty);
+            return result.Args.Replace("run \"collection.json\" ", string.Empty);
         }
 
         internal static ExceptionAssertions<T> WhereMessageContains<T>(this ExceptionAssertions<T> exception, string s) where T : System.Exception
