@@ -3,10 +3,8 @@ using Xunit;
 
 namespace Cake.Newman.Tests
 {
-
     public sealed class ExtensionMethodTests
     {
-
         [Fact]
         public void ShouldSpecifyBailWhenInvoked()
         {
@@ -96,6 +94,32 @@ namespace Cake.Newman.Tests
 
             // Then
             result.Args().Should().Be("--folder \"Services\"");
+        }
+
+        [Fact]
+        public void ShouldSpecifySilentWhenInvoked()
+        {
+            // Given
+            var fixture = new NewmanFixture(s => s.WithNoOutputToCLI());
+
+            // When
+            var result = fixture.Run();
+
+            // Then
+            result.Args().Should().Be("--silent");
+        }
+
+        [Fact]
+        public void ShouldSetCollectionRunTimeoutWhenInvoked()
+        {
+            // Given
+            var fixture = new NewmanFixture(s => s.SetCollectionRunTimeout(1500));
+
+            // When
+            var result = fixture.Run();
+
+            // Then
+            result.Args().Should().Be("--timeout 1500");
         }
 
         public sealed class TheExportMethods

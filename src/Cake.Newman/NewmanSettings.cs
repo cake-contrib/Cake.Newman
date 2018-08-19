@@ -89,6 +89,16 @@ namespace Cake.Newman
         public int IterationCount { get; set; }
 
         /// <summary>
+        ///     Specify whether or not newman should show output to CLI.
+        /// </summary>
+        public bool NoOutputToCLI { get; set; }
+
+        /// <summary>
+        ///     Specify collection run timeout.
+        /// </summary>
+        public int CollectionRunTimeout { get; set; }
+
+        /// <summary>
         ///     Reporters (and any reporter-specific options) for test results
         /// </summary>
         public Dictionary<string, IReporterSettings> Reporters { get; set; } =
@@ -125,10 +135,12 @@ namespace Cake.Newman
                 args.AppendSwitch(ArgumentNames.ScriptTimeout, ScriptTimeout.ToString());
             }
             if (DisableStrictSSL) args.Append(ArgumentNames.Insecure);
-            if (IgnoreRedirects) args.Append(ArgumentNames.IgnoreRedirects);
+            if (IgnoreRedirects) args.Append(ArgumentNames.IgnoreRedirects);            
             if (RequestDelay != default(int)) args.AppendSwitch(ArgumentNames.RequestDelay, RequestDelay.ToString());
             if (IterationCount != default(int)) args.AppendSwitch(ArgumentNames.IterationCount, IterationCount.ToString());
             if (ExitOnFirstFailure) args.Append(ArgumentNames.Bail);
+            if (NoOutputToCLI) args.Append(ArgumentNames.Silent);
+            if (CollectionRunTimeout != default(int)) args.AppendSwitch(ArgumentNames.CollectionRunTimeout, CollectionRunTimeout.ToString());
             if (Reporters.Any())
             {
                 args.AppendSwitch(ArgumentNames.Reporters,

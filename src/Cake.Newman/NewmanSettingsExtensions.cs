@@ -182,5 +182,28 @@ namespace Cake.Newman
             settings.IterationCount = iterationCount;
             return settings;
         }
+
+        /// <summary>
+        /// Specify whether or not to output on CLI.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings WithNoOutputToCLI(this NewmanSettings settings)
+        {
+            settings.NoOutputToCLI = true;
+            return settings;
+        }
+
+        /// <summary>
+        /// Specify collection run timeout.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="timeout">The time (in milliseconds)</param>
+        /// <returns>The updated settings.</returns>
+        public static NewmanSettings SetCollectionRunTimeout(this NewmanSettings settings, int timeout)
+        {
+            settings.CollectionRunTimeout = timeout;
+            return settings;
+        }
     }
 }
