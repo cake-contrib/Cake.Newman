@@ -17,5 +17,7 @@ namespace Cake.Newman
         internal const string Reporters = "--reporters";
         internal const string IterationCount = "--iteration-count";
         internal const string Data = "-d";
+        internal const string Silent = "--silent";
+        internal const string CollectionRunTimeout = "--timeout";
     }
 }

@@ -44,6 +44,17 @@ namespace Cake.Newman.Tests
                 result.Args().Should().Be("--bail");
             }
 
+            [Fact]
+            public void ShouldIncludeSilentWhenSet()
+            {
+                var fixture = new NewmanFixture { Settings = { NoOutputToCLI = true } };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                result.Args().Should().Be("--silent");
+            }
         }
 
         [Theory]
@@ -89,6 +100,21 @@ namespace Cake.Newman.Tests
 
             // Then
             result.Args().Should().Be($"--timeout-script {timeout}");
+        }
+
+        [Theory]
+        [InlineData(2000)]
+        [InlineData(3000)]
+        public void ShouldSpecifyCollectionRunTimeoutWhenSet(int timeout)
+        {
+            // Given
+            var fixture = new NewmanFixture { Settings = { CollectionRunTimeout = timeout } };
+
+            // When
+            var result = fixture.Run();
+
+            // Then
+            result.Args().Should().Be($"--timeout {timeout}");
         }
 
         [Fact]
